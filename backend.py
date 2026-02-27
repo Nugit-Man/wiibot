@@ -157,3 +157,19 @@ def is_admin(ID):
             return False
         if(int(text) == ID):
             return True
+        
+def add_admin(ID):
+    """Adds a user to the admin list
+    
+    Arguments:
+        ID: the ID of the user being added
+        
+    Returns:
+        0: User added sucsessfully
+        1: WARNING: User already admin"""
+    if(is_admin(ID)):
+        return 1
+    fout = open("admins.txt","a")
+    fout.print(str(ID)+"\n")
+    fout.close()
+    return 0
