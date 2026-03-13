@@ -1,17 +1,6 @@
 import arraylist
 import ranked
-
-class Person:
-    def init(self,id,name,marioKart,eatFatFight,brawl,swordFight):
-         self.id = int(id)
-         self.name = str(name)
-         self.marioKart = bool(marioKart)
-         self.eatFatFight = bool(eatFatFight)
-         self.brawl = bool(brawl)
-         self.swordFight = bool(swordFight)
-    def tostr (self):
-        #only used to write to file
-        return f"{self.id},{self.name},{self.marioKart},{self.eatFatFight},{self.brawl},{self.swordFight}"
+from objects import Person
 
 def register(ID,name):
     """Registers a player for ranked games
