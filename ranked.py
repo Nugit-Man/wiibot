@@ -1,6 +1,7 @@
 import arraylist
 import math
 from objects import Rating
+from objects import Game
 
 def getlist(name):
     array = []
@@ -68,7 +69,7 @@ def register(ID,name,game):
     if (fin == 2):
         return 2
 
-    list = getlist(fin)
+    list = getlist(getGame(game))
     if(arraylist.hasID(list,ID)):
         return 1
     
@@ -170,6 +171,18 @@ def get_matches(game):
         
     returns:
         Array list of matches"""
+    name = getGame(game).split("/")[1]
+    name = f"games/{name}"
+    array = []
+    fin = open(name,"r")
+    #put it all into an array
+    while True:
+        text = fin.readline().strip()
+        if text == "":
+            break
+        array.append(Game(text.split(",") [0],text.split(",") [1],text.split(",") [2]))
+    fin.close()
+    return array
 
 
 def update_ratings(game):
@@ -182,3 +195,4 @@ def update_ratings(game):
         0: task sucsessful"""
 
     q = 2.302585092994046/400.0
+    game_list = get_matches(game)
