@@ -114,6 +114,7 @@ def changeRD(game):
     """
     fin = open("ratings/"+getGame(game),"r")
     list = getlist(fin)
+    fin.close()
     for i in range(len(list)):
         c = 34.6
         RD = list[i].RD 
@@ -141,3 +142,19 @@ def reset(game):
     fin.close()
     return 0
 
+def add_game(game,winner,loser,tie):
+    """Adds a ranked game to the ranked database
+    
+    Arguents:
+        game: ID of game played
+        winner: ID of winner
+        loser: ID of loser
+        tie: boolean if it was a tie
+        
+    Returns:
+        0: worked sucsessfully"""
+    name = getGame(game)
+    fout = open(name,"a")
+    fout.write(f"{winner},{loser},{tie}\n")
+    fout.close()
+    return 0

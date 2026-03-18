@@ -156,3 +156,16 @@ def add_admin(ID):
     fout.close()
     return 0
 
+def add_game(game,winner,loser,tie):
+    """Adds a ranked game to the ranked database
+    
+    Arguents:
+        game: ID of game played
+        winner: ID of winner
+        loser: ID of loser
+        tie: boolean if it was a tie
+        
+    Returns:
+        0: worked sucsessfully"""
+    ranked.add_game(game,winner,loser,tie)
+    return 0
