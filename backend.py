@@ -16,7 +16,7 @@ def register(ID,name):
     list = arraylist.get()
     if(arraylist.hasID(list,ID)):
         return 1
-    list.append(Person(str(ID),name,"false","false","false"))
+    list.append(Person(str(ID),name))
     arraylist.save(list)
     return 0
 
