@@ -8,6 +8,9 @@ class Rating:
          self.wins = int(wins)
          self.loses = int(loses)
          self.ties = int(ties)
+         self.gRD = 0
+         self.scoresum = 0
+         self.d2sum = 0
     def tostr (self):
         #only used to write to file
         return f"{self.id},{self.name},{self.rating},{self.certian},{self.RD},{self.wins},{self.loses},{self.ties}"

@@ -1,5 +1,6 @@
 import arraylist
 import math
+import glicko
 from objects import Rating
 from objects import Game
 
@@ -20,7 +21,7 @@ def saveGame(list,fout):
 
     Arguments:
         list: the list being saved
-        fout: fut value of file being writen to
+        fout: fout value of file being writen to
     """
     for i in range(len(list)):
         fout.write(list[i].tostr()+"\n")
@@ -175,13 +176,17 @@ def get_matches(game):
     name = f"games/{name}"
     array = []
     fin = open(name,"r")
+    fout = open(f"log/{name}","a")
+    fout.write("\n")
     #put it all into an array
     while True:
         text = fin.readline().strip()
         if text == "":
             break
+        fout.write(text+"\n")
         array.append(Game(text.split(",") [0],text.split(",") [1],text.split(",") [2]))
     fin.close()
+    fout.close()
     return array
 
 
@@ -194,6 +199,58 @@ def update_ratings(game):
     Returns:
         0: task sucsessful"""
 
-    q = 2.302585092994046/400.0
+    
     game_list = get_matches(game)
     player_list = getlist(game)
+
+    for i in range(len(game_list)):
+
+        #pull the winer and lser of the current match
+        winner = arraylist.index(player_list,game_list[i].winner)
+        loser = arraylist.index(player_list,game_list[i].loser)
+
+        #Calculate the two players gRD though could probably just do this for everyone elsewhere to prevent repeat
+        player_list[winner].gRD = glicko.gRD(player_list[winner].RD)
+        player_list[loser].gRD = glicko.gRD(player_list[loser].RD)
+
+        #Pull Es values because we are going to be using them a few times
+        Es_winner = glicko.Es(player_list[loser].gRD,player_list[winner].rating,player_list[loser].rating)
+        Es_loser = glicko.Es(player_list[loser].gRD,player_list[winner].rating,player_list[loser].rating)
+
+        #Add the values to d2 (not yet multiplied by q2)
+        player_list[winner].d2sum += player_list[loser].gRD**2 * Es_winner * (1-Es_winner)
+        player_list[winner].d2sum += player_list[loser].gRD**2 * Es_loser * (1-Es_loser)
+
+        #add the values to the scoresum (also here is where draws come into accout)
+        if(game_list[i].tie):
+            player_list[winner].scoresum += player_list[loser].gRD * (.5-Es_winner)
+            player_list[loser].scoresum += player_list[winner].gRD * (.5-Es_loser)
+            player_list[winner].ties += 1
+            player_list[loser].ties += 1
+        else:
+            player_list[winner].scoresum += player_list[loser].gRD * (1-Es_winner)
+            player_list[loser].scoresum += player_list[winner].gRD * (0-Es_loser)
+            player_list[winner].wins += 1
+            player_list[loser].loses += 1
+        
+
+    #Update each players r and RD (Also make sure to skip users who didn't play to avoid division by 0)
+    for i in range(len(player_list)):
+        if(player_list[i].d2sum != 0):
+            #first, multiply d2 by q2
+            player_list[i].d2sum *= glicko.q()**2
+
+            #Update their rating
+            player_list[i].rating += (glicko.q()*player_list[i].scoresum/((1/player_list[i].RD**2)+(1/player_list[i].d2sum**2)))
+            
+            #Finally, update their RD
+            player_list[i].RD = math.sqrt(1/((1/player_list[i].RD**2)+(1/player_list[i].d2sum**2)))
+
+    #clear game log
+    name = getGame(game).split("/")[1]
+    fout = open(f"games/{name}","w")
+    fout.close()
+
+    fout = open(f"ratings/{name}","w")
+    saveGame(player_list,fout)
+    fout.close()
