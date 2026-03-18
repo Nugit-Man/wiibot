@@ -19,3 +19,8 @@ class Person:
     def tostr (self):
         #only used to write to file
         return f"{self.id},{self.name}"
+class Game:
+    def __init__(self,winner,loser,tie):
+        self.winner = int(winner)
+        self.loser = int(loser)
+        self.tie = bool(tie)

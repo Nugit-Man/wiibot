@@ -61,7 +61,7 @@ def register(ID,name,game):
         2: ERROR: Game does not exist
     """
 
-    fin = open("ratings/"+getGame(game),"r")
+    fin = open(getGame(game),"r")
     fin.close()
     if (fin == 2):
         return 2
@@ -70,7 +70,7 @@ def register(ID,name,game):
     if(arraylist.hasID(list,ID)):
         return 1
     
-    list.append(Rating(ID,name,1500,False,350))
+    list.append(Rating(ID,name,1500,False,350,0,0,0))
     fin.close()
     fout = open("ratings/"+getGame(game),"w")
     saveGame(list,fout)
@@ -153,8 +153,20 @@ def add_game(game,winner,loser,tie):
         
     Returns:
         0: worked sucsessfully"""
-    name = getGame(game)
+    name = getGame(game).split("/")[1]
+    name = f"games/{name}"
     fout = open(name,"a")
     fout.write(f"{winner},{loser},{tie}\n")
     fout.close()
     return 0
+
+def update_ratings(game):
+    """updates the ratings for the given game
+    
+    Arguemnts:
+        game: ID of game
+        
+    Returns:
+        0: task sucsessful"""
+
+    q = 2.302585092994046/400.0
