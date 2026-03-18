@@ -2,14 +2,16 @@ import arraylist
 import math
 from objects import Rating
 
-def getlist(fin):
+def getlist(name):
     array = []
+    fin = open(name,"r")
     #put it all into an array
     while True:
         text = fin.readline().strip()
         if text == "":
             break
         array.append(Rating(text.split(",") [0],text.split(",") [1],text.split(",") [2],text.split(",") [3],text.split(",") [4]))
+    fin.close()
     return array
 
 def saveGame(list,fout):
@@ -159,6 +161,16 @@ def add_game(game,winner,loser,tie):
     fout.write(f"{winner},{loser},{tie}\n")
     fout.close()
     return 0
+
+def get_matches(game):
+    """Gets the matches for a game and puts them in an object arraylist
+    
+    Arguments:
+        game: ID of game
+        
+    returns:
+        Array list of matches"""
+
 
 def update_ratings(game):
     """updates the ratings for the given game
