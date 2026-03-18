@@ -10,7 +10,7 @@ class Rating:
          self.ties = int(ties)
     def tostr (self):
         #only used to write to file
-        return f"{self.id},{self.name},{self.rating},{self.rating},{self.RD},{self.wins},{self.loses},{self.ties}"
+        return f"{self.id},{self.name},{self.rating},{self.certian},{self.RD},{self.wins},{self.loses},{self.ties}"
 
 class Person:
     def __init__(self,id,name):
@@ -19,6 +19,7 @@ class Person:
     def tostr (self):
         #only used to write to file
         return f"{self.id},{self.name}"
+    
 class Game:
     def __init__(self,winner,loser,tie):
         self.winner = int(winner)
