@@ -75,7 +75,7 @@ def register(ID,name,game):
     
     list.append(Rating(ID,name,1500,False,350,0,0,0))
     fin.close()
-    fout = open("ratings/"+getGame(game),"w")
+    fout = open(getGame(game),"w")
     saveGame(list,fout)
     fout.close()
     return 0
@@ -196,3 +196,4 @@ def update_ratings(game):
 
     q = 2.302585092994046/400.0
     game_list = get_matches(game)
+    player_list = getlist(game)
