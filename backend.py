@@ -38,30 +38,14 @@ def unrated(ID,name,game):
     if(place == -1):
         return 1
     if(game != 0):
-
-        if(game==1):
-            if(list[place].marioKart):
-                return 2
-            list[place].marioKart = True
-        elif(game==2):
-            if(list[place].eatFatFight):
-                return 2
-            list[place].eatFatFight = True
-        elif(game==3):
-            if(list[place].brawl):
-                return 2
-            list[place].brawl = True
-        elif(game==4):
-            if(list[place].swordFight):
-                return 2
-            list[place].swordFight = True
-        
+        if(arraylist.hasID(ranked.getlist(fin = open(ranked.getGame(game),"r")),ID)):
+            return 2
 
         return ranked.register(ID,name,game)
     
     #register for all the games, checking to see if any work to return the correct value
     sucsess = 0
-    for i in range(1,5):
+    for i in range(1,7):
         out = ranked.register(ID,name,i)
         if(out == 0):
             sucsess += 1
@@ -104,7 +88,7 @@ def new_day():
     Returns:
         0: Worked sucsessfully
     """
-    for i in range(1,4):
+    for i in range(1,6):
         ranked.changeRD(i)
         ranked.reset(i)
 
@@ -125,7 +109,7 @@ def add_game(game,winner,loser,tie):
     fout.close()
     return 0
 
-def game_list():
+def game_list(): 
     """Gets the game list
 
     Returns:
@@ -133,7 +117,10 @@ def game_list():
     """
     return "Mario Kart Wii" \
     "Eat Fat Fight" \
-    "Super Smash Bros Brawl"
+    "Super Smash Bros Brawl"\
+    "Wii sports Swordfighting"\
+    "Wii sports Boxing"\
+    "Mario Super Sluggers"
 
 def is_admin(ID):
     """Checks if the user is a admin
