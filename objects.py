@@ -1,5 +1,5 @@
 class Rating:
-    def init(self,id,name,rating,certian,RD,wins,loses):
+    def __init__(self,id,name,rating,certian,RD,wins,loses,ties):
          self.id = int(id)
          self.name = str(name)
          self.rating = int(rating)
@@ -7,12 +7,13 @@ class Rating:
          self.RD = float(RD)
          self.wins = int(wins)
          self.loses = int(loses)
+         self.ties = int(ties)
     def tostr (self):
         #only used to write to file
-        return f"{self.id},{self.name},{self.rating},{self.rating},{self.RD},{self.wins},{self.loses}"
+        return f"{self.id},{self.name},{self.rating},{self.rating},{self.RD},{self.wins},{self.loses},{self.ties}"
 
 class Person:
-    def init(self,id,name):
+    def __init__(self,id,name):
          self.id = int(id)
          self.name = str(name)
     def tostr (self):
