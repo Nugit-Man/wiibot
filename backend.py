@@ -169,3 +169,27 @@ def add_game(game,winner,loser,tie):
         0: worked sucsessfully"""
     ranked.add_game(game,winner,loser,tie)
     return 0
+
+def end_day():
+    """Ends the day's rating period and updates everyones ratings
+    
+    Returns:
+        0: Worked sucsessfully
+    """
+
+def get_name(ID):
+    """Gets the name of a user based of their ID
+    
+    Arguemtns:
+        ID: id of user
+        
+    Returns:
+        name: name of user
+        0: user is not registered"""
+    
+    list = arraylist.get()
+    if(is_registered(ID)):
+        for i in range(len(list)):
+            if(list[i].id == ID):
+                return list[i].name
+    return "0"
