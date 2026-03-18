@@ -38,7 +38,7 @@ def unrated(ID,name,game):
     if(place == -1):
         return 1
     if(game != 0):
-        if(arraylist.hasID(ranked.getlist(ranked.getGame(game),"r"),ID)):
+        if(arraylist.hasID(ranked.getlist(ranked.getGame(game)),ID)):
             return 2
 
         return ranked.register(ID,name,game)
