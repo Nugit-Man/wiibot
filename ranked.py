@@ -33,17 +33,17 @@ def getGame(game):
         2: Error: Game does not exist
     """
     if(game==1):
-        return "mariokart.csv"
+        return "ratings/mariokart.csv"
     elif(game==2):
-        return "eatfatfight.csv"
+        return "ratings/eatfatfight.csv"
     elif(game==3):
-        return "brawl.csv"
+        return "ratings/brawl.csv"
     elif(game==4):
-        return "swordFight.csv"
+        return "ratings/swordFight.csv"
     elif(game==5):
-        return "boxing.csv"
+        return "ratings/boxing.csv"
     elif(game==6):
-        return "sluggers.csv"
+        return "ratings/sluggers.csv"
     else:
         return 2
 

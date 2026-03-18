@@ -18,4 +18,3 @@ class Person:
     def tostr (self):
         #only used to write to file
         return f"{self.id},{self.name}"
-
