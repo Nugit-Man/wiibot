@@ -216,8 +216,8 @@ def update_ratings(game):
         Es_loser = glicko.Es(player_list[loser].gRD,player_list[winner].rating,player_list[loser].rating)
 
         #Add the values to d2 (not yet multiplied by q2)
-        player_list[winner].d2sum += player_list[loser].gRD**2 * Es_winner * (1-Es_winner)
         player_list[winner].d2sum += player_list[loser].gRD**2 * Es_loser * (1-Es_loser)
+        player_list[loser].d2sum += player_list[winner].gRD**2 * Es_winner * (1-Es_winner)
 
         #add the values to the scoresum (also here is where draws come into accout)
         if(game_list[i].tie):
