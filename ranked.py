@@ -199,7 +199,7 @@ def update_ratings(game):
 
     
     game_list = get_matches(game)
-    player_list = getlist(game)
+    player_list = getlist(getGame(game))
 
     for i in range(len(game_list)):
 
