@@ -252,3 +252,5 @@ def update_ratings(game):
     fout = open(f"ratings/{name}","w")
     saveGame(player_list,fout)
     fout.close()
+
+    return 0

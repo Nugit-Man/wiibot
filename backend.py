@@ -179,6 +179,7 @@ def end_day():
     """
     for i in range(1,7):
         ranked.update_ratings(i)
+    return 0
 
 def get_name(ID):
     """Gets the name of a user based of their ID
