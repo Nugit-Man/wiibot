@@ -140,7 +140,7 @@ def reset(game):
     Arguements:
         game: ID of game being reset
     """
-    fin = open("games/"+getGame(game),"w")
+    fin = open("games/"+getGame(game).split("/")[1],"w")
     fin.close()
     return 0
 
