@@ -103,9 +103,9 @@ def add_game(game,winner,loser,tie):
     """
     fout = open("games/"+ranked.getGame(game),"a")
     if(tie):
-        fout.print(winner+","+loser+",true")
+        fout.write(winner+","+loser+",true")
     else:
-        fout.print(winner+","+loser+",false")
+        fout.write(winner+","+loser+",false")
     fout.close()
     return 0
 
@@ -152,7 +152,7 @@ def add_admin(ID):
     if(is_admin(ID)):
         return 1
     fout = open("admins.txt","a")
-    fout.print(str(ID)+"\n")
+    fout.write(str(ID)+"\n")
     fout.close()
     return 0
 
