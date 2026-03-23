@@ -91,6 +91,7 @@ def new_day():
     for i in range(1,6):
         ranked.changeRD(i)
         ranked.reset(i)
+    return 0
 
 def add_game(game,winner,loser,tie):
     """Adds a rated game to the game database
