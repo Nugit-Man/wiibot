@@ -116,9 +116,7 @@ def changeRD(game):
     Arguments:
         game: the number of the game being changed
     """
-    fin = open(getGame(game),"r")
-    list = getlist(fin)
-    fin.close()
+    list = getlist(getGame(game))
     for i in range(len(list)):
         c = 34.6
         RD = list[i].RD 
