@@ -174,7 +174,7 @@ def get_matches(game):
     name = f"games/{name}"
     array = []
     fin = open(name,"r")
-    fout = open(f"log/{name}","a")
+    fout = open(f"history/{name}","a")
     fout.write("\n")
     #put it all into an array
     while True:
