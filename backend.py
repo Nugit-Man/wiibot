@@ -137,7 +137,7 @@ def is_admin(ID):
         if(text == ""):
             fin.close()
             return False
-        if(int(text) == ID):
+        if(int(text) == int(ID)):
             return True
         
 def add_admin(ID):
