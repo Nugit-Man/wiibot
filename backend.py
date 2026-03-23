@@ -131,7 +131,7 @@ def is_admin(ID):
     Returns:
         Boolean if that user is an admin or not
     """
-    fin = open("admin.txt","r")
+    fin = open("admins.txt","r")
     while True:
         text = fin.readline().strip()
         if(text == ""):
