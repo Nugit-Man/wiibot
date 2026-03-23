@@ -241,10 +241,10 @@ def update_ratings(game):
             player_list[i].d2sum *= glicko.q()**2
 
             #Update their rating
-            player_list[i].rating += (glicko.q()*player_list[i].scoresum/((1/player_list[i].RD**2)+(1/player_list[i].d2sum**2)))
+            player_list[i].rating += (glicko.q()*player_list[i].scoresum/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))
             
             #Finally, update their RD
-            player_list[i].RD = math.sqrt(1/((1/player_list[i].RD**2)+(1/player_list[i].d2sum**2)))
+            player_list[i].RD = math.sqrt(1/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))
 
     #clear game log
     name = getGame(game).split("/")[1]
