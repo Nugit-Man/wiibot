@@ -94,7 +94,7 @@ def get_rating(ID,game):
         -1: Player not registered for the game\n
         -2: the game does not exist
     """
-    fin = open("ratings/"+getGame(game),"r")
+    fin = open(getGame(game),"r")
     fin.close()
     if (fin == 2):
         return -2
@@ -116,7 +116,7 @@ def changeRD(game):
     Arguments:
         game: the number of the game being changed
     """
-    fin = open("ratings/"+getGame(game),"r")
+    fin = open(getGame(game),"r")
     list = getlist(fin)
     fin.close()
     for i in range(len(list)):
@@ -132,7 +132,7 @@ def changeRD(game):
         else:
             list[i].certian = False
         list[i].RD = num
-    fout = open("ratings/"+getGame(game),"w")
+    fout = open(getGame(game),"w")
     saveGame(list,fout)
     fout.close()
 
