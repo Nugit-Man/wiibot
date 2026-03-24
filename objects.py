@@ -2,7 +2,7 @@ class Rating:
     def __init__(self,id,name,rating,certian,RD,wins,loses,ties):
          self.id = int(id)
          self.name = str(name)
-         self.rating = int(rating)
+         self.rating = float(rating)
          self.certian = bool(certian)
          self.RD = float(RD)
          self.wins = int(wins)
