@@ -220,7 +220,7 @@ def update_ratings(game):
         player_list[loser].d2sum += player_list[winner].gRD**2 * Es_winner * (1-Es_winner)
 
         #add the values to the scoresum (also here is where draws come into accout)
-        if(game_list[i].tie):
+        if(game_list[i].tie == "True"):
             player_list[winner].scoresum += player_list[loser].gRD * (.5-Es_winner)
             player_list[loser].scoresum += player_list[winner].gRD * (.5-Es_loser)
             player_list[winner].ties += 1
@@ -237,12 +237,12 @@ def update_ratings(game):
         if(player_list[i].d2sum != 0):
             #first, multiply d2 by q2
             player_list[i].d2sum *= glicko.q()**2
-
+            player_list[i].d2sum = (player_list[i].d2sum)**-1
+            print(player_list[i].d2sum)
             #Update their rating
             player_list[i].rating += (glicko.q()*player_list[i].scoresum/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))
-            
             #Finally, update their RD
-            player_list[i].RD = math.sqrt(1/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))
+            player_list[i].RD = math.sqrt((1/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))**-1)
 
     #clear game log
     name = getGame(game).split("/")[1]

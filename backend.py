@@ -197,3 +197,5 @@ def get_name(ID):
             if(list[i].id == ID):
                 return list[i].name
     return "0"
+
+end_day()
