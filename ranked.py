@@ -155,8 +155,7 @@ def add_game(game,winner,loser,tie):
         
     Returns:
         0: worked sucsessfully"""
-    name = getGame(game).split("/")[1]
-    name = f"games/{name}"
+    name = "games/"+getGame(game).split("/")[1]
     fout = open(name,"a")
     fout.write(f"{winner},{loser},{tie}\n")
     fout.close()
@@ -186,7 +185,6 @@ def get_matches(game):
     fin.close()
     fout.close()
     return array
-
 
 def update_ratings(game):
     """updates the ratings for the given game
