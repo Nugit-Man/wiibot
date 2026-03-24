@@ -12,7 +12,7 @@ class ChangelogButton(discord.ui.View):
     @discord.ui.button(label="Get a list of previous versions here!", style=discord.ButtonStyle.primary)
     async def button_callback(self, button, interaction):
         try:
-            await interaction.user.send("# WiiBot v0.3 - 03/24/2026\n- Ranked functionality has been added\n- Added four new admin-only commands: `/admin register`, `/admin startranked`, `/admin endranked`, and `/admin gamelog`\n- Backend bugfixes\n\n# WiiBot v0.2 - 03/18/2026\n- Completed backend\n- Finished two commands: `/register`, and `/joingame`\n- Backend bugfixes\n\n# WiiBot v0.1 - 02/25/2026\n- Introduced three new commands: `/help`, `/ping`, and `/changelog`\n\n# WiiBot v0.0 - 02/23/2026\n- I was born today! Isn't that cool?")
+            await interaction.user.send("# WiiBot v0.3.1 - 03/24/2026\n- Added which game was played to the `/admin gamelog` output\n\n\n# WiiBot v0.3 - 03/24/2026\n- Ranked functionality has been added\n- Added four new admin-only commands: `/admin register`, `/admin startranked`, `/admin endranked`, and `/admin gamelog`\n- Backend bugfixes\n\n# WiiBot v0.2 - 03/18/2026\n- Completed backend\n- Finished two commands: `/register`, and `/joingame`\n- Backend bugfixes\n\n# WiiBot v0.1 - 02/25/2026\n- Introduced three new commands: `/help`, `/ping`, and `/changelog`\n\n# WiiBot v0.0 - 02/23/2026\n- I was born today! Isn't that cool?")
             await interaction.response.send_message("DMed you a list of all previous versions!",ephemeral=True)
         except discord.Forbidden:
             await interaction.response.send_message("Something went wrong trying to send you a DM. Have you enabled DMs from this server?",ephemeral=True)
@@ -21,7 +21,7 @@ class ChangelogButton(discord.ui.View):
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game("v0.3"))
+    await bot.change_presence(activity=discord.Game("v0.3.1"))
     print("welcome to the wii zone")
 
 '''
@@ -40,7 +40,7 @@ async def ping(ctx):
     
 @bot.slash_command(description="Get a summary of WiiBot's newest update, or look at old WiiBot versions", integration_types={discord.IntegrationType.guild_install, discord.IntegrationType.user_install})
 async def changelog(ctx):
-    await ctx.send_response(embed = discord.Embed(description="# WiiBot v0.3 - 03/24/2026\n- Ranked functionality has been added\n- Added four new admin-only commands: `/admin register`, `/admin startranked`, `/admin endranked`, and `/admin gamelog`\n- Backend bugfixes",colour=0xf4f4f4),view=ChangelogButton())
+    await ctx.send_response(embed = discord.Embed(description="# WiiBot v0.3.1 - 03/24/2026\n- Added which game was played to the `/admin gamelog` output",colour=0xf4f4f4),view=ChangelogButton())
 
 @bot.slash_command(description="Register with the bot", integration_types={discord.IntegrationType.guild_install, discord.IntegrationType.user_install})
 async def register(ctx, name:str):
@@ -139,9 +139,9 @@ async def gamelog(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat Fi
         check = backend.add_game(gameid,winnerid,loserid,tie)
         if check == 0:
             if tie == "Yes":
-                await ctx.send_response("Ranked game has been successfully logged!\n\nThe game ended in a tie.\nPlayers: <@" + str(winnerid) + ">, <@" + str(loserid) + ">")
+                await ctx.send_response("Ranked game has been successfully logged!\n\nThe game ended in a tie.\nGame: " + str(game) + "\nPlayers: <@" + str(winnerid) + ">, <@" + str(loserid) + ">")
             else:
-                await ctx.send_response("Ranked game has been successfully logged!\n\n<@" + str(winnerid) + "> won the match.\nPlayers: <@" + str(winnerid) + ">, <@" + str(loserid) + ">")
+                await ctx.send_response("Ranked game has been successfully logged!\n\n<@" + str(winnerid) + "> won the match.\nGame: " + str(game) + "\nPlayers: <@" + str(winnerid) + ">, <@" + str(loserid) + ">")
         else:
             await ctx.send_response("Something went wrong.", ephemeral=True)
 
