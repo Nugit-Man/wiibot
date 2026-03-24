@@ -211,7 +211,7 @@ def update_ratings(game):
 
         #Pull Es values because we are going to be using them a few times
         Es_winner = glicko.Es(player_list[loser].gRD,player_list[winner].rating,player_list[loser].rating)
-        Es_loser = glicko.Es(player_list[loser].gRD,player_list[winner].rating,player_list[loser].rating)
+        Es_loser = glicko.Es(player_list[winner].gRD,player_list[loser].rating,player_list[winner].rating)
 
         #Add the values to d2 (not yet multiplied by q2)
         player_list[winner].d2sum += player_list[loser].gRD**2 * Es_loser * (1-Es_loser)
@@ -240,7 +240,7 @@ def update_ratings(game):
             #Update their rating
             player_list[i].rating += (glicko.q()*player_list[i].scoresum/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))
             #Finally, update their RD
-            player_list[i].RD = math.sqrt((1/((1/player_list[i].RD**2)+(1/player_list[i].d2sum)))**-1)
+            player_list[i].RD = math.sqrt(((1/player_list[i].RD**2)+(1/player_list[i].d2sum))**-1)
 
     #clear game log
     name = getGame(game).split("/")[1]
