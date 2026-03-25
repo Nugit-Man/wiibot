@@ -91,22 +91,18 @@ def get_rating(ID,game):
 
     Returns:
         Positive value: Rating of player\n
-        -1: Player not registered for the game\n
-        -2: the game does not exist
+        -1: Player is not registered for the game
     """
-    fin = open(getGame(game),"r")
-    fin.close()
-    if (fin == 2):
-        return -2
+    name = getGame(game)
     
-    list = getlist(fin)
+    list = getlist(name)
     place = arraylist.index(list,ID)
     if(place == -1):
         return -1
     
     #check for certanty
     text = str(list[place].rating)
-    if(list[place].certian):
+    if(list[place].rating < 100.0):
         return text
     return text + "?"
 

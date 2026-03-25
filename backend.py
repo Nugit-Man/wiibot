@@ -63,7 +63,7 @@ def get_rating(ID,game):
         ID: ID of person
         game: the ID of the game
 
-    Returns:
+    Returns [AS A STRING!]:
         Positive value: Rating of player\n
         -1: Player not registered for the game\n
         -2: Game does not exist
