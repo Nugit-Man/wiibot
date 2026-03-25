@@ -55,3 +55,22 @@ def index(array, ID):
     for i in range(len(array)):
         if(array[i].id == ID): return i
     return -1
+
+def length(file):
+    """Reads a file and returns the amount of lines
+    
+    Arguments:
+        file: name of the file
+
+    Returns:
+        int value of amount of lines
+    """
+
+    fin = open(file, "r")
+    count = 0
+
+    while True:
+        text = fin.readline().strip()
+        if(text==""):
+            return count
+        count += 1

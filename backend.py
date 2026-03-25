@@ -197,3 +197,14 @@ def get_name(ID):
             if(list[i].id == ID):
                 return list[i].name
     return "0"
+
+def get_players(game):
+    """Enter a game ID and return how many players are rated
+    
+    Arguemnts:
+        game: ID of game
+
+    returns:
+        Int of amount of players
+    """
+    return arraylist.length(ranked.getGame(game))
