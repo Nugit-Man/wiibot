@@ -208,3 +208,38 @@ def get_players(game):
         Int of amount of players
     """
     return arraylist.length(ranked.getGame(game))
+
+def get_rank(game,ID):
+    """Gets a players rank in a rated game
+    
+    Arguments:
+        game: the game beeing searched
+        ID: the user being searched
+        
+    Returns:
+        -1: User not rated in that game\n
+        positive int: rank in the game"""
+    player_list = ranked.getlist(ranked.getGame(game))
+    for i in range(len(player_list)):
+        if(player_list[i].id == ID): return i
+    return -1
+
+def find_player(game,rank):
+    """Finds the ID of a player based off of a rank in a game
+    
+    Arguments:
+        game: the ID of the game beaing searched
+        rank: find the player at that rank
+        
+    Returns:
+        -1: No player is at that rank\n
+        Id of player at that rank
+    """   
+    player_list = ranked.getlist
+
+    #1. Check if there are enoguh ranked players
+    if(rank>len(player_list)):
+        return -1
+
+    return -1
+
