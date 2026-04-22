@@ -235,11 +235,19 @@ def find_player(game,rank):
         -1: No player is at that rank\n
         Id of player at that rank
     """   
-    player_list = ranked.getlist
+    player_list = ranked.getlist(ranked.getGame(game))
 
     #1. Check if there are enoguh ranked players
     if(rank>len(player_list)):
         return -1
+    for i in range(rank):
+        highest =-1
+        spot = -1
+        for j in range(len(player_list)):
+            if (player_list[j].ID > highest):
+                highest = player_list[j]
+                spot = j
+        player_list.pop(spot)        
 
-    return -1
+    return spot
 
