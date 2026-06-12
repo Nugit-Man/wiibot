@@ -68,7 +68,7 @@ def get_rating(ID,game):
         -1: Player not registered for the game\n
         -2: Game does not exist
     """
-    return ranked.get(ID,game)
+    return ranked.get_rating(ID,game)
 
 def is_registered(ID):
     """Checks if the user is registered
