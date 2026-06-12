@@ -98,11 +98,11 @@ def get_rating(ID,game):
     list = getlist(name)
     place = arraylist.index(list,ID)
     if(place == -1):
-        return -1
+        return "-1"
     
     #check for certanty
     text = str(list[place].rating)
-    if(list[place].rating < 100.0):
+    if(list[place].RD < 100.0):
         return text
     return text + "?"
 

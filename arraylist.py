@@ -1,4 +1,5 @@
 from objects import Person
+from objects import Rating
 
 def get():
     """Get the registered player list
