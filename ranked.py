@@ -102,6 +102,8 @@ def get_rating(ID,game):
     
     #check for certanty
     text = str(list[place].rating)
+    if(text.count(".") == 1):
+        text = text.split(".") [0]
     if(list[place].RD < 100.0):
         return text
     return text + "?"
