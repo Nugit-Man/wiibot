@@ -12,7 +12,7 @@ def getlist(name):
         text = fin.readline().strip()
         if text == "":
             break
-        array.append(Rating(text.split(",") [0],text.split(",") [1],text.split(",") [2],text.split(",") [3],text.split(",") [4],text.split(",") [5],text.split(",") [6],text.split(",") [7]))
+        array.append(Rating(text.split(",") [0],text.split(",") [1],text.split(",") [2],text.split(",") [3],text.split(",") [4],text.split(",") [5],text.split(",") [6]))
     fin.close()
     return array
 
@@ -74,7 +74,7 @@ def register(ID,name,game):
     if(arraylist.hasID(list,ID)):
         return 1
     
-    list.append(Rating(ID,name,1500,False,350,0,0,0))
+    list.append(Rating(ID,1500,False,350,0,0,0))
     fin.close()
     fout = open(getGame(game),"w")
     saveGame(list,fout)

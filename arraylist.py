@@ -14,7 +14,7 @@ def get():
         text = fin.readline().strip()
         if text == "":
             break
-        array.append(Person(text.split(",") [0],text.split(",") [1]))
+        array.append(Person(text))
     fin.close()
     return array
 

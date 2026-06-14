@@ -1,7 +1,6 @@
 class Rating:
-    def __init__(self,id,name,rating,certian,RD,wins,loses,ties):
+    def __init__(self,id,rating,certian,RD,wins,loses,ties):
          self.id = int(id)
-         self.name = str(name)
          self.rating = float(rating)
          self.certian = bool(certian)
          self.RD = float(RD)
@@ -13,15 +12,14 @@ class Rating:
          self.d2sum = 0
     def tostr (self):
         #only used to write to file
-        return f"{self.id},{self.name},{self.rating},{self.certian},{self.RD},{self.wins},{self.loses},{self.ties}"
+        return f"{self.id},{self.rating},{self.certian},{self.RD},{self.wins},{self.loses},{self.ties}"
 
 class Person:
-    def __init__(self,id,name):
+    def __init__(self,id):
          self.id = int(id)
-         self.name = str(name)
     def tostr (self):
         #only used to write to file
-        return f"{self.id},{self.name}"
+        return f"{self.id}"
     
 class Game:
     def __init__(self,winner,loser,tie):
