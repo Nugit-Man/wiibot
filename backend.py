@@ -7,7 +7,6 @@ def register(ID,name):
     
     Arguments:
         ID: The ID of the user
-        name: the name of the user
 
     Returns:
         0: Seccsessful register\n
@@ -16,16 +15,15 @@ def register(ID,name):
     list = arraylist.get()
     if(arraylist.hasID(list,ID)):
         return 1
-    list.append(Person(str(ID),name))
+    list.append(Person(str(ID)))
     arraylist.save(list)
     return 0
 
-def unrated(ID,name,game):
+def unrated(ID,game):
     """give someone an inital rating of 1500 in a game of thier choice
     
     Arguments:
         ID: ID of the person
-        name: the name of the player
         game: the game they wish to join (0 for all)
 
     Returns:
@@ -41,12 +39,12 @@ def unrated(ID,name,game):
         if(arraylist.hasID(ranked.getlist(ranked.getGame(game)),ID)):
             return 2
 
-        return ranked.register(ID,name,game)
+        return ranked.register(ID,game)
     
     #register for all the games, checking to see if any work to return the correct value
     sucsess = 0
     for i in range(1,7):
-        out = ranked.register(ID,name,i)
+        out = ranked.register(ID,i)
         if(out == 0):
             sucsess += 1
         if(out == 1):
