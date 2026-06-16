@@ -237,11 +237,11 @@ def get_rank_leaderboard(game,ID):
     rank = 0
     while True:
         rank += 1
-        greatest = 10000
+        lowest = -1
         spot = -1
         for i in range(len(player_list)):
-            if player_list[i].id < greatest:
-                greatest = player_list[i].id
+            if player_list[i].rating > lowest:
+                lowest = player_list[i].rating
                 spot = i
         if(ID == player_list[spot].id):
             return rank
