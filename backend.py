@@ -2,7 +2,7 @@ import arraylist
 import ranked
 from objects import Person
 
-def register(ID,name):
+def register(ID):
     """Registers a player for ranked games
     
     Arguments:
