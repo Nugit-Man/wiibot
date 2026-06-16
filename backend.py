@@ -208,7 +208,7 @@ def get_players(game):
     return arraylist.length(ranked.getGame(game))
 
 def get_rank(game,ID):
-    """Gets a players rank in a rated game
+    """Gets a players rank in a rated game based on their order register
     
     Arguments:
         game: the game beeing searched
@@ -221,6 +221,36 @@ def get_rank(game,ID):
     for i in range(len(player_list)):
         if(player_list[i].id == ID): return i
     return -1
+
+def get_rank_leaderboard(game,ID):
+    """Gets a players rank in a rated game based on their rating
+    
+    Arguments:
+        game: the game beeing searched
+        ID: the user being searched
+        
+    Returns:
+        -1: User not rated in that game\n
+        positive int: rank in the game"""
+    
+    player_list = ranked.getlist(ranked.getGame(game))
+    rank = 0
+    while True:
+        rank += 1
+        lowest = -1
+        spot = -1
+        for i in range(len(player_list)):
+            if player_list[i].id > lowest:
+                lowest = player_list[i].id
+                spot = i
+        if(ID == player_list[spot].id):
+            return rank
+        player_list.pop(spot)
+        if(len(player_list) == 0):
+            return -1
+
+
+
 
 def find_player(game,rank):
     """Finds the ID of a player based off of a rank in a game
