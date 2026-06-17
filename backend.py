@@ -249,9 +249,6 @@ def get_rank_leaderboard(game,ID):
         if(len(player_list) == 0):
             return -1
 
-
-
-
 def find_player(game,rank):
     """Finds the ID of a player based off of a rank in a game
     
