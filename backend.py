@@ -43,7 +43,7 @@ def unrated(ID,game):
     
     #register for all the games, checking to see if any work to return the correct value
     sucsess = 0
-    for i in range(1,7):
+    for i in range(1,8):
         out = ranked.register(ID,i)
         if(out == 0):
             sucsess += 1
@@ -86,7 +86,7 @@ def new_day():
     Returns:
         0: Worked sucsessfully
     """
-    for i in range(1,6):
+    for i in range(1,8):
         ranked.changeRD(i)
         ranked.reset(i)
     return 0
@@ -119,7 +119,8 @@ def game_list():
     "Super Smash Bros Brawl"\
     "Wii sports Swordfighting"\
     "Wii sports Boxing"\
-    "Mario Super Sluggers"
+    "Mario Super Sluggers"\
+    "Mario Strikers Charged"
 
 def is_admin(ID):
     """Checks if the user is a admin
@@ -175,7 +176,7 @@ def end_day():
     Returns:
         0: Worked sucsessfully
     """
-    for i in range(1,7):
+    for i in range(1,8):
         ranked.update_ratings(i)
     return 0
 
