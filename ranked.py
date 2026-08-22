@@ -53,7 +53,7 @@ def getGame(game):
     else:
         return 2
 
-def register(ID,name,game):
+def register(ID,game):
     """Registers you for a ranking
     
     Arguments:
