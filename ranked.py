@@ -49,7 +49,7 @@ def getGame(game):
     elif(game==6):
         return "ratings/sluggers.csv"
     elif(game==7):
-            return "ratings/strikers.csv"
+        return "ratings/strikers.csv"
     else:
         return 2
 
