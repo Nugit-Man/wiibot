@@ -54,7 +54,7 @@ async def register(ctx):
         await ctx.send_response("You are already registered!", ephemeral=True)
 
 @bot.slash_command(description="Join a ranked game", integration_types={discord.IntegrationType.guild_install, discord.IntegrationType.user_install})
-async def joingame(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat Fight","Super Smash Bros. Brawl","Wii Sports Resort Swordfighting","Wii Sports Boxing","Mario Super Sluggers"])): # ADDHERE
+async def joingame(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat Fight","Super Smash Bros. Brawl","Wii Sports Resort Swordfighting","Wii Sports Boxing","Mario Super Sluggers","Mario Strikers Charged"])): # ADDHERE
     if game == "Mario Kart Wii":
         gameid = 1
     elif game == "Eat Fat Fight":
@@ -67,12 +67,13 @@ async def joingame(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat F
         gameid = 5
     elif game == "Mario Super Sluggers":
         gameid = 6
+    elif game == "Mario Strikers Charged":
+        gameid = 7
     # ADDHERE
     else:
         await ctx.send_response("Something went wrong trying to fetch the game ID.", ephemeral=True)
 
-    name = backend.get_name(ctx.author.id)
-    registration = backend.unrated(ctx.author.id,name,gameid)
+    registration = backend.unrated(ctx.author.id,gameid)
     if registration == 0:
         await ctx.send_response("You have successfully joined " + game + " with a skill rating of 1500!")
     elif registration == 1:
@@ -121,7 +122,7 @@ async def endranked(ctx):
         await ctx.send_response(errorMessage, ephemeral=True)
 
 @admin.command(description="Add a ranked game", integration_types={discord.IntegrationType.guild_install, discord.IntegrationType.user_install})
-async def gamelog(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat Fight","Super Smash Bros. Brawl","Wii Sports Resort Swordfighting","Wii Sports Boxing","Mario Super Sluggers"]), winner:discord.User, loser:discord.User, tie:discord.Option(choices=["Yes","No"])): # ADDHERE
+async def gamelog(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat Fight","Super Smash Bros. Brawl","Wii Sports Resort Swordfighting","Wii Sports Boxing","Mario Super Sluggers","Mario Strikers Charged"]), winner:discord.User, loser:discord.User, tie:discord.Option(choices=["Yes","No"])): # ADDHERE
     if backend.is_admin(ctx.author.id):
         if game == "Mario Kart Wii":
             gameid = 1
@@ -141,6 +142,9 @@ async def gamelog(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat Fi
         elif game == "Mario Super Sluggers":
             gameid = 6
             gameicon = "https://files.catbox.moe/cce7gw.png"
+        elif game == "Mario Strikers Charged":
+            gameid = 7
+            gameicon = "https://files.catbox.moe/nmd5xb.png"
         # ADDHERE
         else:
             await ctx.send_response("Something went wrong trying to fetch the game ID.", ephemeral=True)
@@ -173,6 +177,7 @@ async def profile(ctx, user:discord.Option(discord.User,default=None)):
     game4 = backend.get_rating(user.id,4)
     game5 = backend.get_rating(user.id,5)
     game6 = backend.get_rating(user.id,6)
+    game7 = backend.get_rating(user.id,7)
     # ADDHERE
     
     if game1 == "-1":
@@ -187,6 +192,8 @@ async def profile(ctx, user:discord.Option(discord.User,default=None)):
         game5 = "N/A"
     if game6 == "-1":
         game6 = "N/A"
+    if game7 == "-1":
+        game7 = "N/A"
     # ADDHERE
 
     if game1 != "N/A":
@@ -225,6 +232,12 @@ async def profile(ctx, user:discord.Option(discord.User,default=None)):
     else:
         rank6 = "X"
         outof6 = str(backend.get_players(6))
+    if game7 != "N/A":
+        rank7 = str(backend.get_rank_leaderboard(7,user.id))
+        outof7 = str(backend.get_players(7))
+    else:
+        rank7 = "X"
+        outof7 = str(backend.get_players(7))
     # ADDHERE
 
     if rank1 == "1":
@@ -275,9 +288,17 @@ async def profile(ctx, user:discord.Option(discord.User,default=None)):
         trophy6 = "🥉"
     else:
         trophy6 = ""
+    if rank7 == "1":
+        trophy7 = "🥇"
+    elif rank7 == "2":
+        trophy7 = "🥈"
+    elif rank7 == "3":
+        trophy7 = "🥉"
+    else:
+        trophy7 = ""
     # ADDHERE
 
-    embed = discord.Embed(description="## <@" + str(user.id) + ">'s profile\n​\n<:mkwii:1516487193307254955> **Mario Kart Wii**\nRating: " + str(game1) + "\nRanking: **#" + rank1 + "**/" + outof1 + " " + trophy1 + "\n\n<:eatfatfight:1516487268624371887> **Eat Fat Fight**\nRating: " + str(game2) + "\nRanking: **#" + rank2 + "**/" + outof2 + " " + trophy2 + "\n\n<:brawl:1516487351134847078> **Super Smash Bros. Brawl**\nRating: " + str(game3) + "\nRanking: **#" + rank3 + "**/" + outof3 + " " + trophy3 + "\n\n<:resort:1516487437243777187> **Wii Sports Resort Swordfighting**\nRating: " + str(game4) + "\nRanking: **#" + rank4 + "**/" + outof4 + " " + trophy4 + "\n\n<:wiisports:1516487495905448137> **Wii Sports Boxing**\nRating: " + str(game5) + "\nRanking: **#" + rank5 + "**/" + outof5 + " " + trophy5 + "\n\n<:sluggers:1516487555431010456> **Mario Super Sluggers**\nRating: " + str(game6) + "\nRanking: **#" + rank6 + "**/" + outof6 + " " + trophy6,colour=0x4ebcff) # ADDHERE
+    embed = discord.Embed(description="## <@" + str(user.id) + ">'s profile\n​\n<:mkwii:1516487193307254955> **Mario Kart Wii**\nRating: " + str(game1) + "\nRanking: **#" + rank1 + "**/" + outof1 + " " + trophy1 + "\n\n<:eatfatfight:1516487268624371887> **Eat Fat Fight**\nRating: " + str(game2) + "\nRanking: **#" + rank2 + "**/" + outof2 + " " + trophy2 + "\n\n<:brawl:1516487351134847078> **Super Smash Bros. Brawl**\nRating: " + str(game3) + "\nRanking: **#" + rank3 + "**/" + outof3 + " " + trophy3 + "\n\n<:resort:1516487437243777187> **Wii Sports Resort Swordfighting**\nRating: " + str(game4) + "\nRanking: **#" + rank4 + "**/" + outof4 + " " + trophy4 + "\n\n<:wiisports:1516487495905448137> **Wii Sports Boxing**\nRating: " + str(game5) + "\nRanking: **#" + rank5 + "**/" + outof5 + " " + trophy5 + "\n\n<:sluggers:1516487555431010456> **Mario Super Sluggers**\nRating: " + str(game6) + "\nRanking: **#" + rank6 + "**/" + outof6 + " " + trophy6 + "\n\n<:strikers:1540744030978310284> **Mario Strikers Charged**\nRating: " + str(game7) + "\nRanking: **#" + rank7 + "**/" + outof7 + " " + trophy7,colour=0x4ebcff) # ADDHERE
     embed.set_thumbnail(url=user.display_avatar.url)
     await ctx.send_response(embed=embed)
 
