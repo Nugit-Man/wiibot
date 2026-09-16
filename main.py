@@ -73,6 +73,10 @@ async def joingame(ctx, game:discord.Option(choices=["Mario Kart Wii","Eat Fat F
     else:
         await ctx.send_response("Something went wrong trying to fetch the game ID.", ephemeral=True)
 
+<<<<<<< HEAD
+=======
+    #name = backend.get_name(ctx.author.id)
+>>>>>>> cea2521329eb433d225c33e7b77881c0a0dd2621
     registration = backend.unrated(ctx.author.id,gameid)
     if registration == 0:
         await ctx.send_response("You have successfully joined " + game + " with a skill rating of 1500!")
