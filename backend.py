@@ -267,13 +267,14 @@ def find_player(game,rank):
     if(rank>len(player_list)):
         return -1
     for i in range(rank):
-        highest =-1
+        highest =-1.0
         spot = -1
         for j in range(len(player_list)):
             if (player_list[j].rating > highest):
-                highest = player_list[j]
+                highest = player_list[j].rating
                 spot = j
-        player_list.pop(spot)        
+        if(i != rank):
+            player_list.pop(spot)        
 
     return spot
 
