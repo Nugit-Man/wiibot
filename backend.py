@@ -273,8 +273,9 @@ def find_player(game,rank):
             if (player_list[j].rating > highest):
                 highest = player_list[j].rating
                 spot = j
+                id = player_list[j].id
         if(i != rank):
             player_list.pop(spot)        
 
-    return player_list[spot].id
+    return id
 
