@@ -276,5 +276,5 @@ def find_player(game,rank):
         if(i != rank):
             player_list.pop(spot)        
 
-    return spot
+    return player_list[spot].id
 
